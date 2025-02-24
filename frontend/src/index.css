@@ -65,6 +65,11 @@
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden;
+    @apply overflow-x-hidden min-w-full;
+  }
+
+  .container {
+    @apply max-w-[1440px] w-full;
   }
 }
 
