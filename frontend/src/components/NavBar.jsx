@@ -6,18 +6,26 @@ const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const location = useLocation()
   
-  // Check if we're on the login, forgot password, or reset password pages
-  const isAuthPage = [
-    '/admin/login',
-    '/admin/forgot-password',
-    '/admin/reset-password'
-  ].includes(location.pathname)
+  // Add authType to URL check
+  const isAuthPage = (type) => {
+    return [
+      `/auth/${type}/login`,
+      `/auth/${type}/forgot-password`,
+      `/auth/${type}/reset-password`
+    ].includes(location.pathname)
+  }
 
-  // Check if we're specifically on forgot password or reset password pages
-  const isPasswordResetPage = [
-    '/admin/forgot-password',
-    '/admin/reset-password'
-  ].includes(location.pathname)
+  const isPasswordResetPage = (type) => {
+    return [
+      `/auth/${type}/forgot-password`,
+      `/auth/${type}/reset-password`
+    ].includes(location.pathname)
+  }
+
+  const isAnyAuthPage = isAuthPage('admin') || isAuthPage('expense')
+  const isAdminAuthPage = isAuthPage('admin')
+  const isExpenseAuthPage = isAuthPage('expense')
+  const isAnyPasswordResetPage = isPasswordResetPage('admin') || isPasswordResetPage('expense')
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -32,18 +40,18 @@ const NavBar = () => {
               {/* Logo */}
               <div className="flex-shrink-0">
                 <Link to="/">
-                <img 
-                  src="/MainLogo.svg" 
-                  alt="Main Logo" 
-                  className="h-40 w-auto md:h-40 mt-3"
-                /></Link>
-                {/* Replace this with image once you have the SVG file */}
+                  <img 
+                    src="/MainLogo.svg" 
+                    alt="Main Logo" 
+                    className="h-40 w-auto md:h-40 mt-3"
+                  />
+                </Link>
               </div>
 
               {/* Navigation Buttons */}
               <div className="hidden md:flex items-center space-x-6">
                 {/* Property Buttons with Black Background */}
-                {!isAuthPage && (
+                {!isAnyAuthPage && (
                   <>
                     <Button className="bg-black text-white hover:bg-gray-800 text-sm">
                       Buy Property
@@ -54,30 +62,45 @@ const NavBar = () => {
                   </>
                 )}
                 
-                {/* Navigation Buttons with Red Background */}
-                {isPasswordResetPage ? (
-                  <Button className="bg-red-600 text-white hover:bg-red-700 text-sm">
+                {/* Auth Navigation Buttons */}
+                {isAnyPasswordResetPage ? (
+                  <Button className="bg-red-600 hover:bg-red-700 text-white">
                     Log in as User
                   </Button>
-                ) : isAuthPage ? (
+                ) : isAdminAuthPage ? (
                   <>
-                    <Button className="bg-red-600 text-white hover:bg-red-700 text-sm">
+                    <Button className="bg-red-600 hover:bg-red-700 text-white">
                       Log in as User
                     </Button>
-                    <Button className="bg-red-600 text-white hover:bg-red-700 text-sm">
-                      Expense Manager
-                    </Button>
+                    <Link to="/auth/expense/login">
+                      <Button className="bg-red-600 hover:bg-red-700 text-white">
+                        Expense Manager
+                      </Button>
+                    </Link>
                   </>
-                ) : (
+                ) : isExpenseAuthPage ? (
                   <>
-                    <Link to="/admin/login">
-                      <Button className="bg-red-600 text-white hover:bg-red-700 text-sm">
+                    <Button className="bg-red-600 hover:bg-red-700 text-white">
+                      Log in as User
+                    </Button>
+                    <Link to="/auth/admin/login">
+                      <Button className="bg-red-600 hover:bg-red-700 text-white">
                         Log in as Admin
                       </Button>
                     </Link>
-                    <Button className="bg-red-600 text-white hover:bg-red-700 text-sm">
-                      Expense Manager
-                    </Button>
+                  </>
+                ) : !isAnyAuthPage && (
+                  <>
+                    <Link to="/auth/admin/login">
+                      <Button className="bg-red-600 hover:bg-red-700 text-white">
+                        Log in as Admin
+                      </Button>
+                    </Link>
+                    <Link to="/auth/expense/login">
+                      <Button className="bg-red-600 hover:bg-red-700 text-white">
+                        Expense Manager
+                      </Button>
+                    </Link>
                   </>
                 )}
               </div>
@@ -107,59 +130,64 @@ const NavBar = () => {
               </div>
             </div>
 
-            {/* Mobile menu, show/hide based on menu state */}
+            {/* Mobile menu */}
             <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
-              <div className="px-2 pt-2 pb-3 space-y-1">
+              <div className="px-2 pt-2 pb-3 space-y-3">
                 {/* Property Buttons in Mobile Menu */}
-                {!isAuthPage && (
+                {!isAnyAuthPage && (
                   <>
                     <Button
-                      className="block w-full text-center text-white bg-black hover:bg-gray-800 text-sm"
+                      className="block w-full text-center text-white bg-black hover:bg-gray-800 text-sm mb-2"
                     >
                       Buy Property
                     </Button>
                     <Button
-                      className="block w-full text-center text-white bg-black hover:bg-gray-800 text-sm"
+                      className="block w-full text-center text-white bg-black hover:bg-gray-800 text-sm mb-2"
                     >
                       Manage Property
                     </Button>
                   </>
                 )}
                 
-                {/* Navigation Buttons in Mobile Menu */}
-                {isPasswordResetPage ? (
-                  <Button
-                    className="block w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm"
-                  >
+                {/* Auth Navigation Buttons in Mobile Menu */}
+                {isAnyPasswordResetPage ? (
+                  <Button className="block w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm">
                     Log in as User
                   </Button>
-                ) : isAuthPage ? (
+                ) : isAdminAuthPage ? (
                   <>
-                    <Button
-                      className="block w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm"
-                    >
+                    <Button className="block w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm mb-2">
                       Log in as User
                     </Button>
-                    <Button
-                      className="block w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm"
-                    >
-                      Expense Manager
-                    </Button>
+                    <Link to="/auth/expense/login" className="block mb-2">
+                      <Button className="w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm">
+                        Expense Manager
+                      </Button>
+                    </Link>
                   </>
-                ) : (
+                ) : isExpenseAuthPage ? (
                   <>
-                    <Link to="/admin/login">
-                      <Button
-                        className="block w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm"
-                      >
+                    <Button className="block w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm mb-2">
+                      Log in as User
+                    </Button>
+                    <Link to="/auth/admin/login" className="block mb-2">
+                      <Button className="w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm">
                         Log in as Admin
                       </Button>
                     </Link>
-                    <Button
-                      className="block w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm"
-                    >
-                      Expense Manager
-                    </Button>
+                  </>
+                ) : !isAnyAuthPage && (
+                  <>
+                    <Link to="/auth/admin/login" className="block mb-2">
+                      <Button className="w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm">
+                        Log in as Admin
+                      </Button>
+                    </Link>
+                    <Link to="/auth/expense/login" className="block mb-2">
+                      <Button className="w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm">
+                        Expense Manager
+                      </Button>
+                    </Link>
                   </>
                 )}
               </div>

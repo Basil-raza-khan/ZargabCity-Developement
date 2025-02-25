@@ -7,9 +7,9 @@ import Text from './components/Text';
 import LandingPage from './components/LandingPage';
 import Page from './components/Page';
 import Footer from './components/Footer';
-import Login from './components/admin/Login';
-import ForgotPassword from './components/admin/ForgotPassword';
-import ResetPassword from './components/admin/ResetPassword';
+import Login from './components/auth/Login';
+import ForgotPassword from './components/auth/ForgotPassword';
+import ResetPassword from './components/auth/ResetPassword';
 
 const appRouter = createBrowserRouter([
   {
@@ -28,16 +28,28 @@ const appRouter = createBrowserRouter([
     )
   },
   {
-    path: '/admin/login',
-    element: <Login />
+    path: '/auth/admin/login',
+    element: <Login authType="admin" />
   },
   {
-    path: '/admin/forgot-password',
-    element: <ForgotPassword />
+    path: '/auth/admin/forgot-password',
+    element: <ForgotPassword authType="admin" />
   },
   {
-    path: '/admin/reset-password',
-    element: <ResetPassword />
+    path: '/auth/admin/reset-password',
+    element: <ResetPassword authType="admin" />
+  },
+  {
+    path: '/auth/expense/login',
+    element: <Login authType="expense" />
+  },
+  {
+    path: '/auth/expense/forgot-password',
+    element: <ForgotPassword authType="expense" />
+  },
+  {
+    path: '/auth/expense/reset-password',
+    element: <ResetPassword authType="expense" />
   }
 ]);
 

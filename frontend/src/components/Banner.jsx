@@ -7,7 +7,7 @@ const Banner = () => {
             <div className="container mx-auto px-4 relative">
                 {/* Left Content */}
                 <div className="w-full md:max-w-[50%] text-center md:text-left md:ml-8 mb-0 md:mb-32">
-                    <h1 className="text-3xl md:text-5xl lg:text-6xl font-semibold leading-tight text-black">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight text-black mb-5">
                         We Are A Leading
                         <br />
                         Real Estate <span className="text-red-500">Agency</span>
@@ -15,14 +15,14 @@ const Banner = () => {
                     <p className="text-gray-600 text-base md:text-lg mt-1 md:mt-4 mb-1 md:mb-6">
                         Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit.Nec Turpis Felis. Maecenas Vestibulum At Nulla A Molestie.
                     </p>
-                    <div className="mt-1 md:mt-6">
+                    <div className="mt-8 md:mt-6">
                         <Button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 text-lg rounded-md shadow-md">
                             Explore
                         </Button>
                     </div>
                 </div>
                 {/* Right Image */}
-                <div className="absolute left-9 -translate-x-1/2 md:translate-x-0 md:right-[-16%] md:left-auto w-[200%] md:w-[120%] h-full flex md:items-start md:justify-end md:top-[180px] z-0 -mt-48">
+                <div className="absolute left-9 -translate-x-1/2 md:translate-x-0 md:right-[-16%] md:left-auto w-[190%] md:w-[120%] h-full flex md:items-start md:justify-end md:top-[180px] z-0 -mt-48">
                     <img
                         src="/BannerImage.svg"
                         alt="House in Hand"
