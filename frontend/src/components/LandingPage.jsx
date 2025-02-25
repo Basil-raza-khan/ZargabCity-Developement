@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 const LandingPage = () => {
   return (
     <div className="w-full bg-white min-h-screen relative z-10">
-<div className="w-screen relative left-[50%] right-[50%] ml-[-50vw] mr-[-50vw] h-0.5 bg-red-600" />
+<div className="w-screen relative left-[50%] right-[50%] ml-[-50vw] mr-[-50vw] h-0.5 bg-red-600 md:mt-[-50px]" />
       <div className="container mx-auto px-4 py-8 md:py-12 mt-28">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Left Content */}

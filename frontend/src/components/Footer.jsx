@@ -67,11 +67,10 @@ const Footer = () => {
         </div>
 
         {/* Copyright Text */}
-        <div className="text-center mt-16 pb-4">
+        <div className="text-center mt-16">
           <p className="text-white text-sm">All Rights For This Website Reserved.</p>
         </div>
       </div>
-      <div className="w-full h-8 bg-[#0A0A0A]"></div>
     </footer>
   );
 };

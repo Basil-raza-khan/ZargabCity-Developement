@@ -81,3 +81,32 @@
   position: relative;
   z-index: 10;
 }
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+    min-height: 100vh;
+  }
+
+  #root {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@layer utilities {
+  .content-container {
+    position: relative;
+    z-index: 10;
+  }
+}
+
+@layer base {
+  body {
+    @apply overflow-x-hidden;
+  }
+  
+  #root {
+    @apply relative min-h-screen flex flex-col;
+  }
+}
