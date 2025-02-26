@@ -260,6 +260,8 @@ const TotalInstalmentDue = () => {
             <SelectItem value="all">All</SelectItem>
             <SelectItem value="residential">Residential</SelectItem>
             <SelectItem value="commercial">Commercial</SelectItem>
+            <SelectItem value="commercial">Street</SelectItem>
+
           </SelectContent>
         </Select>
 
