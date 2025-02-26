@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import './App.css';
 import NavBar from './components/NavBar';
 import Banner from './components/Banner';
@@ -10,6 +10,21 @@ import Footer from './components/Footer';
 import Login from './components/auth/Login';
 import ForgotPassword from './components/auth/ForgotPassword';
 import ResetPassword from './components/auth/ResetPassword';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import Dashboard from './components/admin/Dashboard';
+import TotalAvaliablePlots from './components/admin/TotalAvaliablePlots';
+import TotalBookedPlots from './components/admin/TotalBookedPlots';
+
+// Protected Route Component
+const ProtectedRoute = ({ children }) => {
+  const { currentUser } = useAuth();
+  
+  if (!currentUser || currentUser.role !== 'admin') {
+    return <Navigate to="/auth/admin/login" />;
+  }
+  
+  return children;
+};
 
 const appRouter = createBrowserRouter([
   {
@@ -27,6 +42,7 @@ const appRouter = createBrowserRouter([
       </div>
     )
   },
+
   {
     path: '/auth/admin/login',
     element: <Login authType="admin" />
@@ -50,12 +66,39 @@ const appRouter = createBrowserRouter([
   {
     path: '/auth/expense/reset-password',
     element: <ResetPassword authType="expense" />
-  }
+  },
+  {
+    path: '/admin/dashboard',
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: '/admin/total-available-plots',
+    element: (
+      <ProtectedRoute>
+        <TotalAvaliablePlots />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: '/admin/total-booked-plots',
+    element: (
+      <ProtectedRoute>
+        <TotalBookedPlots />
+      </ProtectedRoute>
+    )
+  },
+  
 ]);
 
 function App() {
   return (
-    <RouterProvider router={appRouter} />
+    <AuthProvider>
+      <RouterProvider router={appRouter} />
+    </AuthProvider>
   );
 }
 

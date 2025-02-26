@@ -110,3 +110,25 @@
     @apply relative min-h-screen flex flex-col;
   }
 }
+
+@media print {
+  @page {
+    size: A4;
+    margin: 20mm;
+  }
+
+  body {
+    visibility: hidden;
+  }
+
+  .print-content {
+    visibility: visible;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .print:hidden {
+    display: none;
+  }
+}

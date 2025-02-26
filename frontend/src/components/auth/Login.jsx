@@ -5,14 +5,18 @@ import Footer from '../Footer';
 import { Button } from "@/components/ui/button";
 import { FiMail } from 'react-icons/fi';
 import { IoEye, IoEyeOff } from "react-icons/io5";
+import { useAuth } from '../../context/AuthContext';
 
 const Login = ({ authType }) => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -21,9 +25,37 @@ const Login = ({ authType }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`${authType} login attempt:`, formData);
+    setError('');
+    setLoading(true);
+
+    try {
+      // Simulate API call - replace with actual API call
+      if (authType === 'admin') {
+        // Mock admin credentials check
+        if (formData.email === 'admin@example.com' && formData.password === 'admin123') {
+          const userData = {
+            id: 1,
+            email: formData.email,
+            role: 'admin',
+            name: 'Basil'
+          };
+          
+          login(userData);
+          navigate('/admin/dashboard');
+        } else {
+          throw new Error('Invalid admin credentials');
+        }
+      } else {
+        // Handle expense manager login
+        throw new Error('Invalid credentials');
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -41,6 +73,12 @@ const Login = ({ authType }) => {
                 Please sign in to your {authType} account
               </p>
             </div>
+
+            {error && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                {error}
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Email Input */}
@@ -121,9 +159,10 @@ const Login = ({ authType }) => {
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded-md transition duration-200"
+                className="w-full bg-red-600 hover:bg-red-700 text-white"
+                disabled={loading}
               >
-                Sign In
+                {loading ? 'Signing in...' : 'Sign In'}
               </Button>
             </form>
 
