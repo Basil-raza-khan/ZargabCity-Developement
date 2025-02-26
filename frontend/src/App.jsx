@@ -14,17 +14,25 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Dashboard from './components/admin/Dashboard';
 import TotalAvaliablePlots from './components/admin/TotalAvaliablePlots';
 import TotalBookedPlots from './components/admin/TotalBookedPlots';
+import UserManagement from './components/admin/UserManagement';
+import TotalInstalmentDue from './components/admin/TotalInstalmentDue';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const { currentUser } = useAuth();
-  
-  if (!currentUser || currentUser.role !== 'admin') {
+
+  console.log("Current User in ProtectedRoute:", currentUser);
+
+  if (!currentUser || currentUser.role !== "admin") {
+    console.warn("Redirecting to /auth/admin/login");
     return <Navigate to="/auth/admin/login" />;
   }
-  
+
+  console.log("Access granted to:", children);
   return children;
 };
+
+
 
 const appRouter = createBrowserRouter([
   {
@@ -91,7 +99,22 @@ const appRouter = createBrowserRouter([
       </ProtectedRoute>
     )
   },
-  
+  {
+    path: '/admin/user-management',
+    element: (
+      <ProtectedRoute>
+        <UserManagement />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: '/admin/total-instalment-due',
+    element: (
+      <ProtectedRoute>
+        <TotalInstalmentDue />
+      </ProtectedRoute>
+    )
+  },  
 ]);
 
 function App() {

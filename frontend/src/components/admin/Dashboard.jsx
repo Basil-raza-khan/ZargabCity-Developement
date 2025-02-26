@@ -47,21 +47,21 @@ const Dashboard = () => {
       <nav className="bg-black shadow-md fixed top-0 left-0 right-0 z-50">
         <div className="container mx-auto px-4">
           <div className="flex justify-between h-16">
-          <div className="flex items-center">
-                <Link to="/admin/dashboard">
-                  <img 
-                    src="/MainLogo.svg" 
-                    alt="Main Logo" 
-                    className="h-40 w-auto md:h-40 mt-3"
-                  />
-                </Link>
-              </div>
+            <div className="flex items-center">
+              <Link to="/admin/dashboard">
+                <img
+                  src="/MainLogo.svg"
+                  alt="Main Logo"
+                  className="h-40 w-auto md:h-40 mt-3"
+                />
+              </Link>
+            </div>
             <div className="flex items-center justify-center space-x-4">
-            <Link to="/"><FaHome className="text-white text-xl" /></Link> 
+              <Link to="/"><FaHome className="text-white text-xl" /></Link>
               <span className="text-white text-lg">Home</span>
               <div className="flex items-center space-x-4 text-white">
                 <span>Welcome, {currentUser.name}</span>
-                <Button 
+                <Button
                   onClick={() => {
                     logout();
                     navigate('/');
@@ -150,6 +150,7 @@ const Dashboard = () => {
                 value={`PKR ${stats.totalAmountReceived.toLocaleString()}`}
                 icon={<BsCashStack className="w-8 h-8" />}
                 bgColor="bg-green-600"
+
               />
             </div>
 
@@ -159,12 +160,17 @@ const Dashboard = () => {
                 title="User Management"
                 icon={<FaUserCog className="w-8 h-8" />}
                 bgColor="bg-purple-600"
+                onClick={() => navigate('/admin/user-management')}
               />
+
               <ManagementCard
                 title="Total Instalment Due"
                 value={`PKR ${stats.totalInstallmentDue.toLocaleString()}`}
                 icon={<BsCashStack className="w-8 h-8" />}
                 bgColor="bg-blue-600"
+                onClick={() => navigate('/admin/total-instalment-due')}
+
+
               />
               <ManagementCard
                 title="Inventory Management"
@@ -191,7 +197,7 @@ const StatCard = ({ title, total, booked, icon, gradient }) => (
 );
 
 const SummaryCard = ({ title, value, icon, bgColor, onClick }) => (
-  <div 
+  <div
     className={`${bgColor} p-6 rounded-lg text-white cursor-pointer hover:opacity-90 transition-opacity`}
     onClick={onClick}
   >
@@ -205,8 +211,9 @@ const SummaryCard = ({ title, value, icon, bgColor, onClick }) => (
   </div>
 );
 
-const ManagementCard = ({ title, value, icon, bgColor }) => (
-  <div className={`${bgColor} p-6 rounded-lg text-white cursor-pointer hover:opacity-90 transition-opacity`}>
+const ManagementCard = ({ title, value, icon, bgColor , onClick}) => (
+  <div className={`${bgColor} p-6 rounded-lg text-white cursor-pointer hover:opacity-90 transition-opacity`}
+  onClick={onClick}>
     <div className="flex items-center justify-between">
       <div>
         <h3 className="text-lg font-semibold mb-2">{title}</h3>
