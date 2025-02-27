@@ -176,6 +176,8 @@ const Dashboard = () => {
                 title="Inventory Management"
                 icon={<MdInventory className="w-8 h-8" />}
                 bgColor="bg-red-800"
+                onClick={() => navigate('/admin/inventory-management')}
+
               />
             </div>
           </div>

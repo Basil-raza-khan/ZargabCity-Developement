@@ -16,7 +16,7 @@ import TotalAvaliablePlots from './components/admin/TotalAvaliablePlots';
 import TotalBookedPlots from './components/admin/TotalBookedPlots';
 import UserManagement from './components/admin/UserManagement';
 import TotalInstalmentDue from './components/admin/TotalInstalmentDue';
-
+import InventoryManagement from './components/admin/InventoryManagement';
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const { currentUser } = useAuth();
@@ -24,11 +24,11 @@ const ProtectedRoute = ({ children }) => {
   console.log("Current User in ProtectedRoute:", currentUser);
 
   if (!currentUser || currentUser.role !== "admin") {
-    console.warn("Redirecting to /auth/admin/login");
+    // console.warn("Redirecting to /auth/admin/login");
     return <Navigate to="/auth/admin/login" />;
   }
 
-  console.log("Access granted to:", children);
+  // console.log("Access granted to:", children);
   return children;
 };
 
@@ -115,6 +115,14 @@ const appRouter = createBrowserRouter([
       </ProtectedRoute>
     )
   },  
+  {
+    path: '/admin/inventory-management',
+    element: (
+      <ProtectedRoute>
+        <InventoryManagement />
+      </ProtectedRoute>
+    )
+  },
 ]);
 
 function App() {
