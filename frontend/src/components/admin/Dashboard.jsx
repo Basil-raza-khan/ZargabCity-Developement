@@ -58,7 +58,7 @@ const Dashboard = () => {
             </div>
             <div className="flex items-center justify-center space-x-4">
               <Link to="/"><FaHome className="text-white text-xl" /></Link>
-              <span className="text-white text-lg">Home</span>
+              <Link to="/"><span className="text-white text-lg">Home</span></Link>
               <div className="flex items-center space-x-4 text-white">
                 <span>Welcome, {currentUser.name}</span>
                 <Button

@@ -10,51 +10,107 @@ import { useAuth } from '../../context/AuthContext';
 const Login = ({ authType }) => {
   const navigate = useNavigate();
   const { login } = useAuth();
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+    setCredentials({
+      ...credentials,
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setError('');
     setLoading(true);
+    setError("");
+    
+    // Hardcoded credentials for demo
+    const adminCredentials = {
+      email: "admin@example.com",
+      password: "admin123"
+    };
+
+    const userCredentials = {
+      email: "user@example.com",
+      password: "user123"
+    };
+
+    const expenseManagerCredentials = {
+      email: "expense@example.com",
+      password: "expense123"
+    };
 
     try {
-      // Simulate API call - replace with actual API call
       if (authType === 'admin') {
-        // Mock admin credentials check
-        if (formData.email === 'admin@example.com' && formData.password === 'admin123') {
+        if (credentials.email === adminCredentials.email && 
+            credentials.password === adminCredentials.password) {
           const userData = {
             id: 1,
-            email: formData.email,
+            email: credentials.email,
             role: 'admin',
-            name: 'Basil'
+            name: 'Admin'
           };
-          
           login(userData);
-          navigate('/admin/dashboard');
+          localStorage.setItem("userType", "admin");
+          navigate("/admin/dashboard");
         } else {
-          throw new Error('Invalid admin credentials');
+          throw new Error("Invalid admin credentials");
         }
-      } else {
-        // Handle expense manager login
-        throw new Error('Invalid credentials');
+      } else if (authType === 'user') {
+        if (credentials.email === userCredentials.email && 
+            credentials.password === userCredentials.password) {
+          const userData = {
+            id: 3,
+            email: credentials.email,
+            role: 'user',
+            name: 'User'
+          };
+          login(userData);
+          localStorage.setItem("userType", "user");
+          navigate("/user/dashboard");
+        } else {
+          throw new Error("Invalid user credentials");
+        }
+      } else if (authType === 'expense') {
+        if (credentials.email === expenseManagerCredentials.email && 
+            credentials.password === expenseManagerCredentials.password) {
+          const userData = {
+            id: 2,
+            email: credentials.email,
+            role: 'expense-manager',
+            name: 'Expense Manager'
+          };
+          login(userData);
+          localStorage.setItem("userType", "expense-manager");
+          navigate("/expense-manager/dashboard");
+        } else {
+          throw new Error("Invalid expense manager credentials");
+        }
       }
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Update the title and description based on auth type
+  const getAuthTypeDisplay = () => {
+    switch(authType) {
+      case 'admin':
+        return 'Admin';
+      case 'user':
+        return 'User';
+      case 'expense':
+        return 'Expense Manager';
+      default:
+        return '';
     }
   };
 
@@ -67,10 +123,10 @@ const Login = ({ authType }) => {
           <div className="bg-white shadow-lg rounded-lg p-6 md:p-8 mx-auto my-4 md:my-0 w-[95%] md:w-full">
             <div className="text-center mb-6">
               <h2 className="text-2xl font-bold text-gray-900">
-                {authType === 'admin' ? 'Admin Login' : 'Expense Manager Login'}
+                {getAuthTypeDisplay()} Login
               </h2>
               <p className="text-gray-600 mt-1 text-sm">
-                Please sign in to your {authType} account
+                Please sign in to your {getAuthTypeDisplay().toLowerCase()} account
               </p>
             </div>
 
@@ -94,7 +150,7 @@ const Login = ({ authType }) => {
                     type="email"
                     id="email"
                     name="email"
-                    value={formData.email}
+                    value={credentials.email}
                     onChange={handleChange}
                     className="pl-10 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     placeholder="Enter your email"
@@ -113,7 +169,7 @@ const Login = ({ authType }) => {
                     type={showPassword ? "text" : "password"}
                     id="password"
                     name="password"
-                    value={formData.password}
+                    value={credentials.password}
                     onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     placeholder="Enter your password"
@@ -201,4 +257,4 @@ const Login = ({ authType }) => {
   );
 };
 
-export default Login; 
+export default Login;

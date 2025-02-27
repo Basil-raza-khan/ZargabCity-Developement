@@ -17,6 +17,8 @@ import TotalBookedPlots from './components/admin/TotalBookedPlots';
 import UserManagement from './components/admin/UserManagement';
 import TotalInstalmentDue from './components/admin/TotalInstalmentDue';
 import InventoryManagement from './components/admin/InventoryManagement';
+import UserDashboard from './components/user/UserDashboard';
+
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const { currentUser } = useAuth();
@@ -32,7 +34,16 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
+// Add a new protected route component for users
+const ProtectedUserRoute = ({ children }) => {
+  const { currentUser } = useAuth();
 
+  if (!currentUser || currentUser.role !== "user") {
+    return <Navigate to="/auth/user/login" />;
+  }
+
+  return children;
+};
 
 const appRouter = createBrowserRouter([
   {
@@ -74,6 +85,10 @@ const appRouter = createBrowserRouter([
   {
     path: '/auth/expense/reset-password',
     element: <ResetPassword authType="expense" />
+  },
+  {
+    path: '/auth/user/login',
+    element: <Login authType="user" />
   },
   {
     path: '/admin/dashboard',
@@ -121,6 +136,14 @@ const appRouter = createBrowserRouter([
       <ProtectedRoute>
         <InventoryManagement />
       </ProtectedRoute>
+    )
+  },
+  {
+    path: '/user/dashboard',
+    element: (
+      <ProtectedUserRoute>
+        <UserDashboard />
+      </ProtectedUserRoute>
     )
   },
 ]);
