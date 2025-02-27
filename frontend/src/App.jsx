@@ -18,6 +18,8 @@ import UserManagement from './components/admin/UserManagement';
 import TotalInstalmentDue from './components/admin/TotalInstalmentDue';
 import InventoryManagement from './components/admin/InventoryManagement';
 import UserDashboard from './components/user/UserDashboard';
+import TotalBookedPlotsUser from './components/user/TotalBookedPlots';
+import DownloadForms from './components/user/DownloadForms';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -143,6 +145,22 @@ const appRouter = createBrowserRouter([
     element: (
       <ProtectedUserRoute>
         <UserDashboard />
+      </ProtectedUserRoute>
+    )
+  },
+  {
+    path: '/user/total-booked-plots',
+    element: (
+      <ProtectedUserRoute>
+        <TotalBookedPlotsUser />
+      </ProtectedUserRoute>
+    )
+  },
+  {
+    path: '/user/download-forms',
+    element: (
+      <ProtectedUserRoute>
+        <DownloadForms />
       </ProtectedUserRoute>
     )
   },
