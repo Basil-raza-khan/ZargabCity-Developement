@@ -20,6 +20,10 @@ import InventoryManagement from './components/admin/InventoryManagement';
 import UserDashboard from './components/user/UserDashboard';
 import TotalBookedPlotsUser from './components/user/TotalBookedPlots';
 import DownloadForms from './components/user/DownloadForms';
+import AmountReceived from './components/admin/AmountRecieved';
+import TotalAvailablePlots from './components/user/TotalAvailablePlots';
+import TotalAmountRecieved from './components/user/TotalAmountRecieved';
+import TotalInstalmentDueUser from './components/user/TotalInstalmentDueUser';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -141,6 +145,14 @@ const appRouter = createBrowserRouter([
     )
   },
   {
+    path: '/admin/amount-recieved',
+    element: (
+      <ProtectedRoute>
+        <AmountReceived />  
+      </ProtectedRoute>
+    )
+  },
+  {
     path: '/user/dashboard',
     element: (
       <ProtectedUserRoute>
@@ -164,6 +176,30 @@ const appRouter = createBrowserRouter([
       </ProtectedUserRoute>
     )
   },
+  {
+    path: '/user/total-available-plots',
+    element: (
+      <ProtectedUserRoute>
+        <TotalAvailablePlots />
+      </ProtectedUserRoute>
+    )
+  },
+  {
+    path: '/user/total-amount-recieved',
+    element: (
+      <ProtectedUserRoute>
+        <TotalAmountRecieved />
+      </ProtectedUserRoute>
+    )
+  },
+  {
+    path: '/user/total-instalment-due',
+    element: (
+      <ProtectedUserRoute>
+        <TotalInstalmentDueUser />
+      </ProtectedUserRoute>
+    )
+  }
 ]);
 
 function App() {

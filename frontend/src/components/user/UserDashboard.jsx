@@ -30,17 +30,23 @@ const UserDashboard = () => {
             <div className="text-2xl font-bold mt-2">350</div>
           </div>
 
-          <div className="p-6 rounded-lg text-white bg-gradient-to-r from-red-800 to-red-600 shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+          <div className="p-6 rounded-lg text-white bg-gradient-to-r from-red-800 to-red-600 shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl"
+          onClick={() => navigate('/user/total-available-plots')}
+          >
             <h3 className="text-lg font-semibold">Total Available Plots</h3>
             <div className="text-2xl font-bold mt-2">4000</div>
           </div>
 
-          <div className="p-6 rounded-lg text-white bg-gradient-to-r from-green-800 to-green-600 shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+          <div className="p-6 rounded-lg text-white bg-gradient-to-r from-green-800 to-green-600 shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl"
+           onClick={() => navigate('/user/total-amount-recieved')}
+          >
             <h3 className="text-lg font-semibold">Total Amount Received</h3>
             <div className="text-2xl font-bold mt-2">PKR 2,000,000</div>
           </div>
 
-          <div className="p-6 rounded-lg text-white bg-gradient-to-r from-purple-800 to-purple-600 shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+          <div className="p-6 rounded-lg text-white bg-gradient-to-r from-purple-800 to-purple-600 shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl"
+            onClick={() => navigate('/user/total-instalment-due')}
+          >
             <h3 className="text-lg font-semibold">Total Instalments Due</h3>
             <div className="text-2xl font-bold mt-2">PKR 10,00,000</div>
           </div>

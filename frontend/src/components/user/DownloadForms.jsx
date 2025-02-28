@@ -4,10 +4,12 @@ import { RiMenu3Line } from 'react-icons/ri';
 import { FaHome } from 'react-icons/fa';
 import { PiCellSignalFull } from 'react-icons/pi';
 import NavBar from './NavBar';
+import ApplicationForm from './ApplicationForm';
 
 const DownloadForms = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [showApplicationForm, setShowApplicationForm] = React.useState(false);
 
   const documents = [
     {
@@ -32,6 +34,17 @@ const DownloadForms = () => {
     }
   ];
 
+  const handleView = (docTitle) => {
+    if (docTitle === "Application Form") {
+      setShowApplicationForm(true);
+    }
+  };
+
+  const handleDownload = (docTitle) => {
+    // Implement download functionality here
+    console.log(`Downloading ${docTitle}`);
+  };
+
   return (
     <div>
       {/* Navigation Bar */}
@@ -55,7 +68,7 @@ const DownloadForms = () => {
               <div key={index} className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
                   <div className="bg-gray-100 p-2 rounded">
-                    <span className="text-xs font-semibold">PDF</span>
+                    <span className="text-xs font-semibold">{doc.type}</span>
                   </div>
                   <div>
                     <h3 className="font-medium">{doc.title}</h3>
@@ -63,10 +76,16 @@ const DownloadForms = () => {
                   </div>
                 </div>
                 <div className="flex space-x-2">
-                  <button className="bg-red-500 text-white px-4 py-1 rounded-md text-sm hover:bg-red-600">
+                  <button 
+                    onClick={() => handleDownload(doc.title)}
+                    className="bg-red-500 text-white px-4 py-1 rounded-md text-sm hover:bg-red-600"
+                  >
                     Download
                   </button>
-                  <button className="bg-black text-white px-4 py-1 rounded-md text-sm hover:bg-gray-800">
+                  <button 
+                    onClick={() => handleView(doc.title)}
+                    className="bg-black text-white px-4 py-1 rounded-md text-sm hover:bg-gray-800"
+                  >
                     View
                   </button>
                 </div>
@@ -78,13 +97,18 @@ const DownloadForms = () => {
         {/* Back Button */}
         <div className="mt-8 flex justify-center">
           <button
-            onClick={() => navigate('/user/total-booked-plots')}
+            onClick={() => navigate('/user/dashboard')}
             className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600"
           >
             Back to Booking
           </button>
         </div>
       </div>
+
+      {/* Application Form Modal */}
+      {showApplicationForm && (
+        <ApplicationForm onClose={() => setShowApplicationForm(false)} />
+      )}
     </div>
   );
 };

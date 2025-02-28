@@ -150,6 +150,8 @@ const Dashboard = () => {
                 value={`PKR ${stats.totalAmountReceived.toLocaleString()}`}
                 icon={<BsCashStack className="w-8 h-8" />}
                 bgColor="bg-green-600"
+                onClick={() => navigate('/admin/amount-recieved')}
+
 
               />
             </div>

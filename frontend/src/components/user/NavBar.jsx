@@ -17,7 +17,7 @@ const NavBar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between gap-16 items-center h-16">
             <div className="flex items-center">
-              <Link to="/admin/dashboard">
+              <Link to="/user/dashboard">
                 <img
                   src="/MainLogo.svg"
                   alt="Main Logo"

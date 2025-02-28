@@ -75,7 +75,7 @@ const TotalBookedPlots = () => {
   // Filter function
   React.useEffect(() => {
     let filtered = [...plotData];
-    
+
     if (category !== 'All') {
       filtered = filtered.filter(plot => plot.category === category);
     }
@@ -144,7 +144,7 @@ const TotalBookedPlots = () => {
   return (
     <div>
       {/* Navigation Bar */}
-    <NavBar  />
+      <NavBar />
 
       <div className="p-4 sm:p-6">
         {/* Filters */}
@@ -243,7 +243,7 @@ const TotalBookedPlots = () => {
                     <td className="px-4">{plot.category}</td>
                     <td className="px-4">{plot.status}</td>
                     <td className="px-4 space-x-2">
-                      <Button 
+                      <Button
                         className="bg-red-600 hover:bg-red-700 text-white"
                         onClick={() => {
                           setSelectedPlot(plot);
@@ -252,7 +252,7 @@ const TotalBookedPlots = () => {
                       >
                         Change Ownership
                       </Button>
-                      <Button 
+                      <Button
                         className="bg-blue-600 hover:bg-blue-700 text-white"
                         onClick={() => {
                           setSelectedPlot(plot);
@@ -261,7 +261,7 @@ const TotalBookedPlots = () => {
                       >
                         {showDetails && selectedPlot?.plotId === plot.plotId ? 'Hide Details' : 'Show Details'}
                       </Button>
-                      <Button 
+                      <Button
                         className="bg-green-600 hover:bg-green-700 text-white"
                         onClick={() => setShowInstalmentPlan(true)}
                       >
@@ -310,7 +310,7 @@ const TotalBookedPlots = () => {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 overflow-y-auto">
             <div className="bg-white rounded-lg p-6 max-w-5xl w-full max-h-[90vh] overflow-y-auto">
               <h2 className="text-3xl font-bold text-center mb-8">Change of Ownership</h2>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Allottee Details */}
                 <div>
