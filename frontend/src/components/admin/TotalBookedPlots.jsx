@@ -14,7 +14,7 @@ import { FiDownload, FiPrinter } from 'react-icons/fi';
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-
+import AnimatedComponent from "../animations/AnimatedComponent";
 const TotalBookedPlots = () => {
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -361,6 +361,7 @@ const TotalBookedPlots = () => {
                 </div>
             </nav>
 
+            <AnimatedComponent>
             <div className="p-4 sm:p-6">
                 {/* Filters */}
                 <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:items-center sm:flex-wrap lg:flex-nowrap">
@@ -644,6 +645,7 @@ const TotalBookedPlots = () => {
                     {selectedPlotDetails && <PrintableForm plot={selectedPlotDetails} />}
                 </DialogContent>
             </Dialog>
+        </AnimatedComponent>
         </div>
     );
 };

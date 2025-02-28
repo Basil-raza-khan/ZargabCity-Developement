@@ -14,7 +14,7 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { X } from "lucide-react";
 import { FaRegCheckCircle } from "react-icons/fa";
-
+import AnimatedComponent from "../animations/AnimatedComponent";
 
 const UserManagement = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -222,6 +222,7 @@ const UserManagement = () => {
         </div>
       </nav>
 
+      <AnimatedComponent>
       {/* Success Alert */}
       {showAlert && (
         <Alert className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 bg-green-50 border-green-500 z-50 shadow-lg p-4 rounded-lg">
@@ -392,7 +393,7 @@ const UserManagement = () => {
       </Dialog>
 
       {/* User Management Table */}
-      <div className="mt-8">
+      <div className="mt-12 bg-gray-50 rounded-lg shadow-lg p-4">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
           <h2 className="text-2xl font-bold">Users</h2>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -486,6 +487,7 @@ const UserManagement = () => {
           </button>
         </Link>
       </div>
+      </AnimatedComponent>
     </div>
   );
 };

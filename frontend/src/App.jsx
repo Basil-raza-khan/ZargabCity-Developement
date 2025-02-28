@@ -16,6 +16,15 @@ import TotalAvaliablePlots from './components/admin/TotalAvaliablePlots';
 import TotalBookedPlots from './components/admin/TotalBookedPlots';
 import UserManagement from './components/admin/UserManagement';
 import TotalInstalmentDue from './components/admin/TotalInstalmentDue';
+import InventoryManagement from './components/admin/InventoryManagement';
+import UserDashboard from './components/user/UserDashboard';
+import TotalBookedPlotsUser from './components/user/TotalBookedPlots';
+import DownloadForms from './components/user/DownloadForms';
+import AmountReceived from './components/admin/AmountRecieved';
+import TotalAvailablePlots from './components/user/TotalAvailablePlots';
+import TotalAmountRecieved from './components/user/TotalAmountRecieved';
+import TotalInstalmentDueUser from './components/user/TotalInstalmentDueUser';
+import ExpenseManager from './components/expenseManager/ExpenseManager';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -24,15 +33,35 @@ const ProtectedRoute = ({ children }) => {
   console.log("Current User in ProtectedRoute:", currentUser);
 
   if (!currentUser || currentUser.role !== "admin") {
-    console.warn("Redirecting to /auth/admin/login");
+    // console.warn("Redirecting to /auth/admin/login");
     return <Navigate to="/auth/admin/login" />;
   }
 
-  console.log("Access granted to:", children);
+  // console.log("Access granted to:", children);
   return children;
 };
 
+// Add a new protected route component for users
+const ProtectedUserRoute = ({ children }) => {
+  const { currentUser } = useAuth();
 
+  if (!currentUser || currentUser.role !== "user") {
+    return <Navigate to="/auth/user/login" />;
+  }
+
+  return children;
+};
+
+// Add this protected route component
+const ProtectedExpenseRoute = ({ children }) => {
+  const { currentUser } = useAuth();
+
+  if (!currentUser || currentUser.role !== "expense-manager") {
+    return <Navigate to="/auth/expense/login" />;
+  }
+
+  return children;
+};
 
 const appRouter = createBrowserRouter([
   {
@@ -76,6 +105,10 @@ const appRouter = createBrowserRouter([
     element: <ResetPassword authType="expense" />
   },
   {
+    path: '/auth/user/login',
+    element: <Login authType="user" />
+  },
+  {
     path: '/admin/dashboard',
     element: (
       <ProtectedRoute>
@@ -115,6 +148,78 @@ const appRouter = createBrowserRouter([
       </ProtectedRoute>
     )
   },  
+  {
+    path: '/admin/inventory-management',
+    element: (
+      <ProtectedRoute>
+        <InventoryManagement />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: '/admin/amount-recieved',
+    element: (
+      <ProtectedRoute>
+        <AmountReceived />  
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: '/user/dashboard',
+    element: (
+      <ProtectedUserRoute>
+        <UserDashboard />
+      </ProtectedUserRoute>
+    )
+  },
+  {
+    path: '/user/total-booked-plots',
+    element: (
+      <ProtectedUserRoute>
+        <TotalBookedPlotsUser />
+      </ProtectedUserRoute>
+    )
+  },
+  {
+    path: '/user/download-forms',
+    element: (
+      <ProtectedUserRoute>
+        <DownloadForms />
+      </ProtectedUserRoute>
+    )
+  },
+  {
+    path: '/user/total-available-plots',
+    element: (
+      <ProtectedUserRoute>
+        <TotalAvailablePlots />
+      </ProtectedUserRoute>
+    )
+  },
+  {
+    path: '/user/total-amount-recieved',
+    element: (
+      <ProtectedUserRoute>
+        <TotalAmountRecieved />
+      </ProtectedUserRoute>
+    )
+  },
+  {
+    path: '/user/total-instalment-due',
+    element: (
+      <ProtectedUserRoute>
+        <TotalInstalmentDueUser />
+      </ProtectedUserRoute>
+    )
+  },
+  {
+    path: '/expense-manager/dashboard',
+    element: (
+      <ProtectedExpenseRoute>
+        <ExpenseManager />
+      </ProtectedExpenseRoute>
+    )
+  }
 ]);
 
 function App() {

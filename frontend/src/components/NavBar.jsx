@@ -64,14 +64,18 @@ const NavBar = () => {
                 
                 {/* Auth Navigation Buttons */}
                 {isAnyPasswordResetPage ? (
-                  <Button className="bg-red-600 hover:bg-red-700 text-white">
-                    Log in as User
-                  </Button>
-                ) : isAdminAuthPage ? (
-                  <>
+                  <Link to="/auth/user/login">
                     <Button className="bg-red-600 hover:bg-red-700 text-white">
                       Log in as User
                     </Button>
+                  </Link>
+                ) : isAdminAuthPage ? (
+                  <>
+                    <Link to="/auth/user/login">
+                      <Button className="bg-red-600 hover:bg-red-700 text-white">
+                        Log in as User
+                      </Button>
+                    </Link>
                     <Link to="/auth/expense/login">
                       <Button className="bg-red-600 hover:bg-red-700 text-white">
                         Expense Manager
@@ -80,9 +84,11 @@ const NavBar = () => {
                   </>
                 ) : isExpenseAuthPage ? (
                   <>
-                    <Button className="bg-red-600 hover:bg-red-700 text-white">
-                      Log in as User
-                    </Button>
+                    <Link to="/auth/user/login">
+                      <Button className="bg-red-600 hover:bg-red-700 text-white">
+                        Log in as User
+                      </Button>
+                    </Link>
                     <Link to="/auth/admin/login">
                       <Button className="bg-red-600 hover:bg-red-700 text-white">
                         Log in as Admin
@@ -151,14 +157,18 @@ const NavBar = () => {
                 
                 {/* Auth Navigation Buttons in Mobile Menu */}
                 {isAnyPasswordResetPage ? (
-                  <Button className="block w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm">
-                    Log in as User
-                  </Button>
-                ) : isAdminAuthPage ? (
-                  <>
-                    <Button className="block w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm mb-2">
+                  <Link to="/auth/user/login">
+                    <Button className="block w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm">
                       Log in as User
                     </Button>
+                  </Link>
+                ) : isAdminAuthPage ? (
+                  <>
+                    <Link to="/auth/user/login">
+                      <Button className="block w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm mb-2">
+                        Log in as User
+                      </Button>
+                    </Link>
                     <Link to="/auth/expense/login" className="block mb-2">
                       <Button className="w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm">
                         Expense Manager
@@ -167,9 +177,11 @@ const NavBar = () => {
                   </>
                 ) : isExpenseAuthPage ? (
                   <>
-                    <Button className="block w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm mb-2">
-                      Log in as User
-                    </Button>
+                    <Link to="/auth/user/login">
+                      <Button className="block w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm mb-2">
+                        Log in as User
+                      </Button>
+                    </Link>
                     <Link to="/auth/admin/login" className="block mb-2">
                       <Button className="w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm">
                         Log in as Admin
