@@ -21,6 +21,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { RiMenu3Line } from "react-icons/ri";
 import { FaHome } from "react-icons/fa";
 import { PiCellSignalFull } from "react-icons/pi";
+import AnimatedComponent from "../animations/AnimatedComponent";
 
 const TotalInstalmentDue = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -163,7 +164,7 @@ const TotalInstalmentDue = () => {
                 <img
                   src="/MainLogo.svg"
                   alt="Main Logo"
-                  className="h-24 sm:h-36 w-auto mt-2 -ml-2 sm:ml-0"
+                  className="h-40 sm:h-36 w-auto mt-2 -ml-2 sm:ml-0"
                 />
               </Link>
             </div>
@@ -236,7 +237,7 @@ const TotalInstalmentDue = () => {
           )}
         </div>
       </nav>
-
+      <AnimatedComponent>
       <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-4 mb-4 sm:mb-6">
         <Select value={subCategory} onValueChange={setSubCategory}>
           <SelectTrigger className="w-full sm:w-[200px]">
@@ -386,6 +387,7 @@ const TotalInstalmentDue = () => {
           Back to Dashboard
         </Button>
       </div>
+      </AnimatedComponent>
     </div>
   );
 };

@@ -10,7 +10,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import Navbar from "../user/Navbar";
-
+import AnimatedComponent from "../animations/AnimatedComponent";
 const TotalAmountRecieved = () => {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -87,10 +87,10 @@ const TotalAmountRecieved = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen ">
       <Navbar />
-      
-      <div className="container mx-auto px-4 py-8">
+      <AnimatedComponent>
+      <div className="container mx-auto px-4 py-8 mt-10 rounded-lg shadow-lg">
         <h1 className="text-2xl font-bold text-center mb-6">Total Amount Received</h1>
         
         <div className="flex flex-wrap gap-4 justify-center mb-6">
@@ -196,6 +196,7 @@ const TotalAmountRecieved = () => {
           </Button>
         </div>
       </div>
+      </AnimatedComponent>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { FaHome } from 'react-icons/fa';
 import { PiCellSignalFull } from 'react-icons/pi';
 import NavBar from './NavBar';
 import ApplicationForm from './ApplicationForm';
-
+import AnimatedComponent from "../animations/AnimatedComponent";
 const DownloadForms = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -51,6 +51,7 @@ const DownloadForms = () => {
       <NavBar />    
 
       {/* Main Content */}
+      <AnimatedComponent>
       <div className="max-w-4xl mx-auto px-4 py-8 ">
         <h1 className="text-3xl font-bold text-center mb-2">Download Forms</h1>
         <p className="text-center text-gray-600 mb-2">
@@ -109,6 +110,7 @@ const DownloadForms = () => {
       {showApplicationForm && (
         <ApplicationForm onClose={() => setShowApplicationForm(false)} />
       )}
+      </AnimatedComponent>
     </div>
   );
 };

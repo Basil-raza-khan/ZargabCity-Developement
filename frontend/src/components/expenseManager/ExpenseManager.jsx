@@ -31,6 +31,7 @@ import { cn } from "@/lib/utils";
 import NavBar from '../NavBar';
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
+import AnimatedComponent from '../animations/AnimatedComponent';
 
 const ExpenseManager = () => {
   const navigate = useNavigate();
@@ -171,252 +172,254 @@ const ExpenseManager = () => {
       <Toaster />
       <NavBar />
       
-      <div className="container mx-auto px-4 pt-20 max-w-5xl">
-        <h1 className="text-3xl font-bold text-center mb-8">Expense Manager</h1>
+      <AnimatedComponent>
+        <div className="container mx-auto px-4 pt-20 max-w-5xl">
+          <h1 className="text-3xl font-bold text-center mb-8">Expense Manager</h1>
 
-        {/* Add Expense Form */}
-        <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "w-full justify-start text-left font-normal",
-                    !newExpense.date && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {newExpense.date ? format(newExpense.date, "PPP") : <span>Pick a date</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <Calendar
-                  mode="single"
-                  selected={newExpense.date}
-                  onSelect={(date) => setNewExpense({ ...newExpense, date })}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-
-            <input
-              type="text"
-              placeholder="Particulars"
-              value={newExpense.particulars}
-              onChange={(e) => setNewExpense({ ...newExpense, particulars: e.target.value })}
-              className="w-full p-2 border rounded"
-            />
-
-            <input
-              type="number"
-              placeholder="Amount"
-              value={newExpense.amount}
-              onChange={(e) => setNewExpense({ ...newExpense, amount: e.target.value })}
-              className="w-full p-2 border rounded"
-            />
-          </div>
-
-          <Button
-            onClick={handleAddExpense}
-            className="mt-4 bg-red-600 hover:bg-red-700 text-white"
-          >
-            Add Expense
-          </Button>
-        </div>
-
-        {/* Filter Section */}
-        <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+          {/* Add Expense Form */}
+          <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
                     variant={"outline"}
                     className={cn(
                       "w-full justify-start text-left font-normal",
-                      !startDate && "text-muted-foreground"
+                      !newExpense.date && "text-muted-foreground"
                     )}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {startDate ? format(startDate, "PPP") : <span>Pick a date</span>}
+                    {newExpense.date ? format(newExpense.date, "PPP") : <span>Pick a date</span>}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0">
                   <Calendar
                     mode="single"
-                    selected={startDate}
-                    onSelect={setStartDate}
+                    selected={newExpense.date}
+                    onSelect={(date) => setNewExpense({ ...newExpense, date })}
                     initialFocus
                   />
                 </PopoverContent>
               </Popover>
+
+              <input
+                type="text"
+                placeholder="Particulars"
+                value={newExpense.particulars}
+                onChange={(e) => setNewExpense({ ...newExpense, particulars: e.target.value })}
+                className="w-full p-2 border rounded"
+              />
+
+              <input
+                type="number"
+                placeholder="Amount"
+                value={newExpense.amount}
+                onChange={(e) => setNewExpense({ ...newExpense, amount: e.target.value })}
+                className="w-full p-2 border rounded"
+              />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant={"outline"}
-                    className={cn(
-                      "w-full justify-start text-left font-normal",
-                      !endDate && "text-muted-foreground"
-                    )}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {endDate ? format(endDate, "PPP") : <span>Pick a date</span>}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                  <Calendar
-                    mode="single"
-                    selected={endDate}
-                    onSelect={setEndDate}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-            </div>
+            <Button
+              onClick={handleAddExpense}
+              className="mt-4 bg-red-600 hover:bg-red-700 text-white"
+            >
+              Add Expense
+            </Button>
           </div>
-        </div>
 
-        {/* Edit Expense Dialog */}
-        <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Edit Expense</DialogTitle>
-            </DialogHeader>
-            {editExpense && (
-              <div className="grid gap-4 py-4">
+          {/* Filter Section */}
+          <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
                       variant={"outline"}
                       className={cn(
                         "w-full justify-start text-left font-normal",
-                        !editExpense.date && "text-muted-foreground"
+                        !startDate && "text-muted-foreground"
                       )}
                     >
                       <CalendarIcon className="mr-2 h-4 w-4" />
-                      {editExpense.date ? format(editExpense.date, "PPP") : <span>Pick a date</span>}
+                      {startDate ? format(startDate, "PPP") : <span>Pick a date</span>}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0">
                     <Calendar
                       mode="single"
-                      selected={editExpense.date}
-                      onSelect={(date) => setEditExpense({ ...editExpense, date })}
+                      selected={startDate}
+                      onSelect={setStartDate}
                       initialFocus
                     />
                   </PopoverContent>
                 </Popover>
-
-                <input
-                  type="text"
-                  placeholder="Particulars"
-                  value={editExpense.particulars}
-                  onChange={(e) => setEditExpense({ ...editExpense, particulars: e.target.value })}
-                  className="w-full p-2 border rounded"
-                />
-
-                <input
-                  type="number"
-                  placeholder="Amount"
-                  value={editExpense.amount}
-                  onChange={(e) => setEditExpense({ ...editExpense, amount: e.target.value })}
-                  className="w-full p-2 border rounded"
-                />
-
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button className="bg-red-600 hover:bg-red-700 text-white">Save Changes</Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent className="bg-red-50">
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        This will update the expense details. This action cannot be undone.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction onClick={handleUpdateExpense}>Continue</AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
               </div>
-            )}
-          </DialogContent>
-        </Dialog>
 
-        {/* Expenses Table */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="flex justify-between items-center p-4 border-b">
-            <h2 className="text-xl font-semibold">Expenses List</h2>
-            <Button
-              onClick={exportToCSV}
-              className="bg-green-600 hover:bg-green-700 text-white"
-            >
-              Export as CSV
-            </Button>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-full justify-start text-left font-normal",
+                        !endDate && "text-muted-foreground"
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {endDate ? format(endDate, "PPP") : <span>Pick a date</span>}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0">
+                    <Calendar
+                      mode="single"
+                      selected={endDate}
+                      onSelect={setEndDate}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
+            </div>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Particulars</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {filteredExpenses.map((expense) => (
-                  <tr key={expense.id}>
-                    <td className="px-6 py-4 whitespace-nowrap">{expense.date}</td>
-                    <td className="px-6 py-4">{expense.particulars}</td>
-                    <td className="px-6 py-4">{expense.amount.toLocaleString()} Rs</td>
-                    <td className="px-6 py-4">
-                      <div className="flex flex-col sm:flex-row gap-2">
-                        <Button
-                          onClick={() => handleEditExpense(expense)}
-                          className="bg-blue-600 hover:bg-blue-700 text-white"
-                        >
-                          Edit
-                        </Button>
-                        <AlertDialog>
-                          <AlertDialogTrigger asChild>
-                            <Button className="bg-red-600 hover:bg-red-700 text-white">
-                              Delete
-                            </Button>
-                          </AlertDialogTrigger>
-                          <AlertDialogContent className="bg-red-50">
-                            <AlertDialogHeader>
-                              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                              <AlertDialogDescription>
-                                This will permanently delete this expense. This action cannot be undone.
-                              </AlertDialogDescription>
-                            </AlertDialogHeader>
-                            <AlertDialogFooter>
-                              <AlertDialogCancel>Cancel</AlertDialogCancel>
-                              <AlertDialogAction onClick={() => handleDeleteExpense(expense.id)}>
-                                Continue
-                              </AlertDialogAction>
-                            </AlertDialogFooter>
-                          </AlertDialogContent>
-                        </AlertDialog>
-                      </div>
-                    </td>
+          {/* Edit Expense Dialog */}
+          <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Edit Expense</DialogTitle>
+              </DialogHeader>
+              {editExpense && (
+                <div className="grid gap-4 py-4">
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-full justify-start text-left font-normal",
+                          !editExpense.date && "text-muted-foreground"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {editExpense.date ? format(editExpense.date, "PPP") : <span>Pick a date</span>}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0">
+                      <Calendar
+                        mode="single"
+                        selected={editExpense.date}
+                        onSelect={(date) => setEditExpense({ ...editExpense, date })}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+
+                  <input
+                    type="text"
+                    placeholder="Particulars"
+                    value={editExpense.particulars}
+                    onChange={(e) => setEditExpense({ ...editExpense, particulars: e.target.value })}
+                    className="w-full p-2 border rounded"
+                  />
+
+                  <input
+                    type="number"
+                    placeholder="Amount"
+                    value={editExpense.amount}
+                    onChange={(e) => setEditExpense({ ...editExpense, amount: e.target.value })}
+                    className="w-full p-2 border rounded"
+                  />
+
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button className="bg-red-600 hover:bg-red-700 text-white">Save Changes</Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent className="bg-red-50">
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This will update the expense details. This action cannot be undone.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={handleUpdateExpense}>Continue</AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </div>
+              )}
+            </DialogContent>
+          </Dialog>
+
+          {/* Expenses Table */}
+          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <div className="flex justify-between items-center p-4 border-b">
+              <h2 className="text-xl font-semibold">Expenses List</h2>
+              <Button
+                onClick={exportToCSV}
+                className="bg-green-600 hover:bg-green-700 text-white"
+              >
+                Export as CSV
+              </Button>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Particulars</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {filteredExpenses.map((expense) => (
+                    <tr key={expense.id}>
+                      <td className="px-6 py-4 whitespace-nowrap">{expense.date}</td>
+                      <td className="px-6 py-4">{expense.particulars}</td>
+                      <td className="px-6 py-4">{expense.amount.toLocaleString()} Rs</td>
+                      <td className="px-6 py-4">
+                        <div className="flex flex-col sm:flex-row gap-2">
+                          <Button
+                            onClick={() => handleEditExpense(expense)}
+                            className="bg-blue-600 hover:bg-blue-700 text-white"
+                          >
+                            Edit
+                          </Button>
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              <Button className="bg-red-600 hover:bg-red-700 text-white">
+                                Delete
+                              </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent className="bg-red-50">
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  This will permanently delete this expense. This action cannot be undone.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction onClick={() => handleDeleteExpense(expense.id)}>
+                                  Continue
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
+      </AnimatedComponent>
     </div>
   );
 };

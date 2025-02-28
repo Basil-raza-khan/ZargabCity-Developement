@@ -19,6 +19,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { useNavigate } from "react-router-dom";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { IoIosArrowDropdown } from "react-icons/io";
+import AnimatedComponent from "../animations/AnimatedComponent";
 
 const TotalAvailablePlots = () => {
   const [category, setCategory] = useState("all");
@@ -251,7 +252,7 @@ const TotalAvailablePlots = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
+      <AnimatedComponent>
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-wrap gap-4 mb-6 items-center justify-between">
           <Select value={category} onValueChange={setCategory}>
@@ -343,7 +344,11 @@ const TotalAvailablePlots = () => {
         </div>
 
         <div className="flex justify-center mt-6">
-          <Button variant="default" className="bg-black text-white">
+        
+          <Button variant="default" className="bg-red-600 hover:bg-red-500 text-white"
+            onClick={() => {
+                navigate('/user/dashboard');
+              }}>
             Back to Dashboard
           </Button>
         </div>
@@ -353,6 +358,7 @@ const TotalAvailablePlots = () => {
       {showInstallmentForm && <InstallmentBookingForm />}
       <ConfirmationDialog />
       <SuccessDialog />
+      </AnimatedComponent>
     </div>
   );
 };

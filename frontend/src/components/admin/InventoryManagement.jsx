@@ -27,7 +27,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { FaRegCheckCircle } from "react-icons/fa";
 import { MdOutlineDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-
+import AnimatedComponent from "../animations/AnimatedComponent";
 const InventoryManagement = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();
@@ -140,7 +140,7 @@ const InventoryManagement = () => {
                                 <img
                                     src="/MainLogo.svg"
                                     alt="Main Logo"
-                                    className="h-36 sm:h-40 w-auto mt-2 sm:mt-3 -ml-4 sm:ml-0"
+                                    className="h-40 sm:h-40 w-auto mt-2 sm:mt-3 -ml-4 sm:ml-0"
                                 />
                             </Link>
                         </div>
@@ -214,6 +214,7 @@ const InventoryManagement = () => {
                 </div>
             </nav>
 
+            <AnimatedComponent>
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl font-bold text-left">Inventory Management</h1>
                 <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
@@ -356,6 +357,7 @@ const InventoryManagement = () => {
                     ))}
                 </TableBody>
             </Table>
+        </AnimatedComponent>
         </div>
     )
 }

@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-
+import AnimatedComponent from "../animations/AnimatedComponent";
 const TotalAvaliablePlots = () => {
   const navigate = useNavigate();
   const { logout } = useAuth();
@@ -125,7 +125,8 @@ const TotalAvaliablePlots = () => {
         </div>
       </nav>
 
-      <div className="p-4 sm:p-6">
+      <AnimatedComponent> 
+      <div className="p-4 sm:p-6 mt-10 bg-gray-100 rounded-lg shadow-lg">
         {/* Header Controls */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
           <div className="col-span-1 sm:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -232,6 +233,7 @@ const TotalAvaliablePlots = () => {
           </button>
         </div>
       </div>
+      </AnimatedComponent>
     </div>
   );
 };

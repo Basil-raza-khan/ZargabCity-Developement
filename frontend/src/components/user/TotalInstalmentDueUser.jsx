@@ -14,6 +14,8 @@ import {
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
+import AnimatedComponent from "../animations/AnimatedComponent";
+
 
 const TotalInstalmentDueUser = () => {
   const navigate = useNavigate();
@@ -64,10 +66,10 @@ const TotalInstalmentDueUser = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen ">
       <Navbar />
-
-      <div className="p-2 sm:p-6 max-w-7xl mx-auto">
+      <AnimatedComponent>
+      <div className="p-2 sm:p-6 max-w-7xl mx-auto mt-10 md:mt-0 rounded-lg shadow-lg">
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Instalments Due</h1>
           <p className="text-gray-500">Track and manage your due installments</p>
@@ -201,7 +203,7 @@ const TotalInstalmentDueUser = () => {
           </p>
         </div>
       </div>
-
+      </AnimatedComponent>
       {/* Details Dialog */}
       <AlertDialog open={showDetails} onOpenChange={setShowDetails}>
         <AlertDialogContent>

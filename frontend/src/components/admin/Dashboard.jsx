@@ -8,6 +8,7 @@ import { GiFarmTractor } from 'react-icons/gi';
 import { AiFillStar } from 'react-icons/ai';
 import { useAuth } from '../../context/AuthContext';
 import { Button } from '../../components/ui/button';
+import { motion } from 'framer-motion';
 
 const Dashboard = () => {
   const { currentUser, logout } = useAuth();
@@ -78,13 +79,33 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <main className="flex-1 bg-gray-50 pt-16">
-        <div className="container mx-auto px-4 py-8">
+        <motion.div 
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{
+            duration: 0.8,
+            type: "spring",
+            bounce: 0.4
+          }}
+          className="container mx-auto px-4 py-8"
+        >
           <div className="max-w-[1400px] mx-auto">
-            <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-            <p className="text-gray-600 mt-1">Welcome back, Admin</p>
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+            >
+              <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+              <p className="text-gray-600 mt-1">Welcome back, Admin</p>
+            </motion.div>
 
             {/* Plot Statistics Cards */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-8 mb-8">
+            <motion.div 
+              initial={{ x: 100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.8, type: "spring" }}
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-8 mb-8"
+            >
               <StatCard
                 title="80 Yards Plots"
                 total={stats.plots.yards80.total}
@@ -127,10 +148,15 @@ const Dashboard = () => {
                 icon={<AiFillStar className="w-6 h-6" />}
                 gradient="from-yellow-400 to-yellow-600"
               />
-            </div>
+            </motion.div>
 
             {/* Summary Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <motion.div 
+              initial={{ x: 100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.8, type: "spring" }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
+            >
               <SummaryCard
                 title="Total Plots Booked"
                 value={stats.totalPlotsBooked}
@@ -151,13 +177,16 @@ const Dashboard = () => {
                 icon={<BsCashStack className="w-8 h-8" />}
                 bgColor="bg-green-600"
                 onClick={() => navigate('/admin/amount-recieved')}
-
-
               />
-            </div>
+            </motion.div>
 
             {/* Management Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <motion.div 
+              initial={{ x: 100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.8, type: "spring" }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
               <ManagementCard
                 title="User Management"
                 icon={<FaUserCog className="w-8 h-8" />}
@@ -171,19 +200,16 @@ const Dashboard = () => {
                 icon={<BsCashStack className="w-8 h-8" />}
                 bgColor="bg-blue-600"
                 onClick={() => navigate('/admin/total-instalment-due')}
-
-
               />
               <ManagementCard
                 title="Inventory Management"
                 icon={<MdInventory className="w-8 h-8" />}
                 bgColor="bg-red-800"
                 onClick={() => navigate('/admin/inventory-management')}
-
               />
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </main>
     </div>
   );
