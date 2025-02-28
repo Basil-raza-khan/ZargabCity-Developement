@@ -24,6 +24,7 @@ import AmountReceived from './components/admin/AmountRecieved';
 import TotalAvailablePlots from './components/user/TotalAvailablePlots';
 import TotalAmountRecieved from './components/user/TotalAmountRecieved';
 import TotalInstalmentDueUser from './components/user/TotalInstalmentDueUser';
+import ExpenseManager from './components/expenseManager/ExpenseManager';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -46,6 +47,17 @@ const ProtectedUserRoute = ({ children }) => {
 
   if (!currentUser || currentUser.role !== "user") {
     return <Navigate to="/auth/user/login" />;
+  }
+
+  return children;
+};
+
+// Add this protected route component
+const ProtectedExpenseRoute = ({ children }) => {
+  const { currentUser } = useAuth();
+
+  if (!currentUser || currentUser.role !== "expense-manager") {
+    return <Navigate to="/auth/expense/login" />;
   }
 
   return children;
@@ -198,6 +210,14 @@ const appRouter = createBrowserRouter([
       <ProtectedUserRoute>
         <TotalInstalmentDueUser />
       </ProtectedUserRoute>
+    )
+  },
+  {
+    path: '/expense-manager/dashboard',
+    element: (
+      <ProtectedExpenseRoute>
+        <ExpenseManager />
+      </ProtectedExpenseRoute>
     )
   }
 ]);
