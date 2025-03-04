@@ -365,23 +365,23 @@ const ExpenseManager = () => {
               </Button>
             </div>
 
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto ">
               <table className="w-full">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Particulars</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    <th className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                    <th className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">Particulars</th>
+                    <th className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                    <th className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white divide-y divide-gray-200 ">
                   {filteredExpenses.map((expense) => (
                     <tr key={expense.id}>
                       <td className="px-6 py-4 whitespace-nowrap">{expense.date}</td>
                       <td className="px-6 py-4">{expense.particulars}</td>
                       <td className="px-6 py-4">{expense.amount.toLocaleString()} Rs</td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-4 flex justify-center items-center">
                         <div className="flex flex-col sm:flex-row gap-2">
                           <Button
                             onClick={() => handleEditExpense(expense)}

@@ -6,6 +6,9 @@ const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const location = useLocation()
   
+  // Add check for expense manager dashboard
+  const isExpenseManagerDashboard = location.pathname === '/expense-manager/dashboard'
+
   // Add authType to URL check
   const isAuthPage = (type) => {
     return [
@@ -102,11 +105,13 @@ const NavBar = () => {
                         Log in as Admin
                       </Button>
                     </Link>
-                    <Link to="/auth/expense/login">
-                      <Button className="bg-red-600 hover:bg-red-700 text-white">
-                        Expense Manager
-                      </Button>
-                    </Link>
+                    {!isExpenseManagerDashboard && (
+                      <Link to="/auth/expense/login">
+                        <Button className="bg-red-600 hover:bg-red-700 text-white">
+                          Expense Manager
+                        </Button>
+                      </Link>
+                    )}
                   </>
                 )}
               </div>
@@ -195,11 +200,13 @@ const NavBar = () => {
                         Log in as Admin
                       </Button>
                     </Link>
-                    <Link to="/auth/expense/login" className="block mb-2">
-                      <Button className="w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm">
-                        Expense Manager
-                      </Button>
-                    </Link>
+                    {!isExpenseManagerDashboard && (
+                      <Link to="/auth/expense/login" className="block mb-2">
+                        <Button className="w-full text-center text-white bg-red-600 hover:bg-red-700 text-sm">
+                          Expense Manager
+                        </Button>
+                      </Link>
+                    )}
                   </>
                 )}
               </div>
