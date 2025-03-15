@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Navbar from "./NavBar";
+import Navbar from "./NavBar.jsx";
 import {
   Select,
   SelectContent,
