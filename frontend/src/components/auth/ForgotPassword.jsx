@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import NavBar from '../NavBar';
+import NavBar from '../NavBar.jsx';
 import Footer from '../Footer';
 import { Button } from "@/components/ui/button";
 import { FiMail } from 'react-icons/fi';

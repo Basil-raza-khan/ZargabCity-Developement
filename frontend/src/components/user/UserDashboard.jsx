@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from './NavBar';
+import NavBar from './NavBar.jsx';
 import AnimatedComponent from '../animations/AnimatedComponent';
 
 const UserDashboard = () => {

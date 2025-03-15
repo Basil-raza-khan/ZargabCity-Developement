@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import NavBar from '../NavBar';
+import NavBar from '../NavBar.jsx';
 import Footer from '../Footer';
 import { Button } from "@/components/ui/button";
 import { BsShieldLock, BsCheckCircle } from "react-icons/bs";

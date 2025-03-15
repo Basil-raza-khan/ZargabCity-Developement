@@ -5,7 +5,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import Navbar from "./Navbar";
+import Navbar from "./NavBar.jsx";
 import {
   Popover,
   PopoverContent,
