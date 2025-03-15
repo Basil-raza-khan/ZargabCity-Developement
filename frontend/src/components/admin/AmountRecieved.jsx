@@ -9,7 +9,7 @@ import {
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
-import Navbar from "../user/Navbar";
+import Navbar from "../user/NavBar.jsx";
 import AnimatedComponent from "../animations/AnimatedComponent";
 const AmountReceived = () => {
   const [startDate, setStartDate] = useState();
